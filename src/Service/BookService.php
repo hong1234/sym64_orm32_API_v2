@@ -36,10 +36,9 @@ class BookService {
             return null;
             // throw new \NotFoundException("Book {$bookId} not found ");
             
-        $reviews = $this->reviewRepository->getReviewsByBookId($bookId);
-        $this->reviewRepository->removeReviews($reviews);
-
+        $this->reviewRepository->deleteReviewsByBookId($bookId);
         $this->bookRepository->removeBook($book);
+        
         return 1;
     }
 

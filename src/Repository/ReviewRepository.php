@@ -44,20 +44,22 @@ class ReviewRepository extends ServiceEntityRepository {
         $this->manager->flush();
     }
 
-    public function removeReviews(array $reviews) {
-        foreach ($reviews as $review) {
-            $this->removeReview($review);
-        }
-        return 1;
-    }
-
-                
-    // public function deleteReviewsByBookId($bookId) {
-    //     return $this->createQueryBuilder('r')
-    //         ->where('r.book = :bookId')
-    //         ->setParameter('bookId', $bookId)
-    //         ->delete();
+    // public function removeReviews(array $reviews) {
+    //     foreach ($reviews as $review) {
+    //         $this->removeReview($review);
+    //     }
+    //     return 1;
     // }
+        
+    public function deleteReviewsByBookId($bookId) {
+        return $this->createQueryBuilder('r')
+            ->delete('App\\Entity\\Review', 'r')
+            ->where('r.book = :bookId')
+            ->setParameter('bookId', $bookId)
+            ->getQuery()
+            ->execute()
+            ;
+    }
 
     /**
     * @return Review[] Returns an array of Review objects
