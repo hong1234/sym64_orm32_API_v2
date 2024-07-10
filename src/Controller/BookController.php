@@ -24,7 +24,7 @@ class BookController extends BaseController {
         $rs = [
             "code"    => "200",
             "message" => "1 Book created",
-            "data"    => $this->getBookDto($book)
+            "data"    => $this->bookService->getBookDto($book)
             // "data"    => $book
         ];
         return new Response($this->toJson($rs), Response::HTTP_CREATED, ['Content-Type' => 'application/json']);
@@ -47,7 +47,7 @@ class BookController extends BaseController {
         $rs = [
             "code"    => "200",
             "message" => "Book {$bookId} updated",
-            "data"    => $this->getBookDto($book)
+            "data"    => $this->bookService->getBookDto($book)
             // "data"    => $book
         ];
         return new Response($this->toJson($rs), Response::HTTP_OK, ['Content-Type' => 'application/json']);
@@ -92,7 +92,7 @@ class BookController extends BaseController {
         $rs = [
             "code"    => "200",
             "message" => "Book {$bookId}",
-            "data"    => $this->getBookDtoDeep($book, $reviews)
+            "data"    => $this->bookService->getBookDtoDeep($book, $reviews)
             // "data"    =>  $book
         ];
         return new Response($this->toJson($rs), Response::HTTP_OK, ['Content-Type' => 'application/json']);
@@ -107,7 +107,7 @@ class BookController extends BaseController {
         $rs = [
             "code"    => "200",
             "message" => "all Books",
-            "data"    => $this->getBookDtoArray($books)
+            "data"    => $this->bookService->getBookDtoArray($books)
             // "data"    =>  $books
         ];
         return new Response($this->toJson($rs), Response::HTTP_OK, ['Content-Type' => 'application/json']);
@@ -120,14 +120,10 @@ class BookController extends BaseController {
         $rs = [
             "code"    => "200",
             "message" => "all Books",
-            "data"    => $this->getBookDtoArray($books)
+            "data"    => $this->bookService->getBookDtoArray($books)
             // "data"    =>  $books
         ];
         return new Response($this->toJson($rs), Response::HTTP_OK, ['Content-Type' => 'application/json']);
-    }
-
-    public function getInputArray(Request $request){
-        return json_decode($request->getContent(), true);
     }
 
 }

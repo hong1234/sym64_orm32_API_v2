@@ -32,7 +32,7 @@ class ReviewController extends BaseController {
         $rs = [
             "code"    => "200",
             "message" => "1 Review created",
-            "data"    => $this->getReviewDto($review)
+            "data"    => $this->bookService->getReviewDto($review)
         ];
         return new Response($this->toJson($rs), Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
@@ -73,14 +73,10 @@ class ReviewController extends BaseController {
         $rs = [
             "code"    => "200",
             "message" => "all reviews of book {$bookId}",
-            "data"    => $this->getReviewDtoArray($reviews)
+            "data"    => $this->bookService->getReviewDtoArray($reviews)
             // "data"    =>  $reviews
         ];
         return new Response($this->toJson($rs), Response::HTTP_OK, ['Content-Type' => 'application/json']);
-    }
-
-    public function getInputArray(Request $request){
-        return json_decode($request->getContent(), true);
     }
 
 }
